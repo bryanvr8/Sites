@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <title>Loja Virtual</title>
+        
+        <meta charcet="uft-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <style>
+           
+            
+           *{
+               font-family: 'Roboto', sans-serif;
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+            }
+             #produtos{
+                 
+                max-width: 900px center;
+                margin: 0px auto;
+                padding: 0 2%;
+                display: flex;
+                flex-wrap: wrap;
+             }
+             
+               
+            
+            
+            #carrinho {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 0 2%;
+                display: block;
+            }
+
+            .produto-single{
+                width: 32%;
+                margin-right: 1%;
+                border: 1px solid #ccc;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .produto-single img{
+                max-width: 100%;
+                
+            }
+
+            .produto-single p{
+                text-align: center;
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            .produto-single a{
+                text-decoration: none;
+                color: ghostwhite;
+                background-color: #2377F5;
+                text-align: center;
+                display: block;
+                padding: 8px 0;
+                font-size: 18px;
+            }
+
+
+
+            h2{
+                background-color: #2377F5;
+                padding: 10px 0;
+                text-align: center;
+                color: ghostwhite;
+
+            }
+
+            .info-single-checkout{
+                border-bottom: 2px solid;              
+                padding: 10px 0;
+                font-size: 18px;
+                text-decoration: none;
+                color: #2377F5;
+
+            }
+
+            @media screen and (max-wight: 768px){
+
+               .produto-single{
+                    width: 100%;
+                    margin-right: 0;
+                }
+            }
+                
+            
+
+        </style>
+
+        <body>
+            <h2>Camisas de Futebol</h2>
+
+            <div id="produtos">
+                
+            </div><!--produtos-->
+
+            <h2>Carrinho:</h2>
+
+            <div id="carrinho">
+               
+            </div><!--carrinho-->
+
+            <script>
+                const items = [
+                {
+                    id: 0,
+                    nome: 'Camisa Chelsea',
+                    img: 'che.jpg',
+                    quantidade: 0
+            
+                },
+                {
+                    id: 1,
+                    nome: 'Camisa Barcelona',
+                    img: 'barcelona.jpg',
+                    quantidade: 0
+            
+                },
+                {
+                    id: 2,
+                    nome:'Camisa PSG fora',
+                    img: 'PSG Fora.jpg',
+                    quantidade: 0
+            
+                },
+                ]
+
+                inicializarLoja = () => {
+                    var containerProdutos = document.getElementById('produtos');
+                    items.map((val)=>{
+                        containerProdutos.innerHTML+=`
+                        <div class="produto-single">
+                            <img src = "`+val.img+`" />
+                            <p>`+val.nome+`</p>
+                            <a key="`+val.id+`" href="#"> Adicionar ao Carrinho <a/>
+                        </div>
+
+                        `;
+                    })
+                }
+
+                inicializarLoja();
+
+
+                atualizarCarrinho = () => {
+                    console.log(items)
+                        var containerCarrinho = document.getElementById('carrinho');
+                        containerCarrinho.innerHTML="";
+                    items.map((val)=>{
+                        if(val.quantidade > 0) {
+                        containerCarrinho.innerHTML+=`
+                        <div class ="info-single-checkout">
+                        <p style="float:left;" >Produto:`+val.nome+`</p>
+                        <p style="float:right;" >Quantidade:`+val.quantidade+`</p>
+                        <div style="clear:both"></div>
+                       
+                        </div>
+
+                        `;
+                         }
+                    })
+
+                }
+
+                var links = document.getElementsByTagName('a');
+
+                for(var i = 0; i < links.length; i++){
+                    links[i].addEventListener("click",function(){
+                        let key = this.getAttribute('key');
+                        items[key].quantidade++;
+                        atualizarCarrinho();
+                        return false;
+                    })
+                }
+
+
+
+
+            </script>
+
+
+        </body>
+    </head>
+</html>
